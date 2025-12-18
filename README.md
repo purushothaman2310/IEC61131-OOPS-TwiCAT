@@ -138,11 +138,3 @@ Add a license if you plan to share or reuse commercially.
 
 ---
 
-If you want, next we can:
-
-* Tighten this README to **professional open-source style**
-* Add **diagrams explaining FIFO flow**
-* Create a **GitHub-friendly folder layout explanation**
-* Or add comments directly inside your FBs explaining the design logic
-
-This is already a solid learning project—now it looks like one too.
