@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Pusher_Itf" Id="{6a404b73-fb82-4d5a-a295-ca4edb8c2080}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Pusher_Itf
+VAR_INPUT
+	i_ifRegister : IF_Register;
+	
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	diProductCounter : DINT;
+	ifFillRegister : IF_FillRegister;
+	
+	xSucess: BOOL;
+END_VAR
+
+VAR_IN_OUT
+	iq_xSensor: BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[xSucess :=__QUERYINTERFACE(i_ifRegister,ifFillRegister);
+IF xSucess THEN
+	diProductCounter := diProductCounter+1;
+	IF iq_xSensor AND ifFillRegister.xReadyForPut THEN
+		iq_xSensor:=FALSE;
+		ifFillRegister.put(i_diInValue:=diProductCounter);
+	END_IF
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

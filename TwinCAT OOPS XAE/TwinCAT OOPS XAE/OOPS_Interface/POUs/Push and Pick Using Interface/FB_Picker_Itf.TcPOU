@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Picker_Itf" Id="{fc6ad728-a2f1-42ea-acce-312b95eca269}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Picker_Itf
+VAR_INPUT
+	i_ifEmptyRegister :IF_EmptyRegister;
+END_VAR
+VAR_OUTPUT
+	diProductNr : DINT;
+END_VAR
+VAR_IN_OUT
+	iq_xSensor : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF i_ifEmptyRegister<> 0 THEN
+	IF iq_xSensor AND i_ifEmptyRegister.xReadyForGet THEN
+		iq_xSensor:= FALSE;
+		diProductNr:=i_ifEmptyRegister.Get();
+	END_IF
+	
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

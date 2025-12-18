@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="PlcTask" Id="{c401494e-8677-44d5-a45a-fecf2cd741be}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>20</Priority>
+    <PouCall>
+      <Name>MAIN</Name>
+    </PouCall>
+    <PouCall>
+      <Name>SR_FIFO</Name>
+    </PouCall>
+    <TaskFBGuid>{a4e4c17f-5f2d-40d6-ac75-c2b50e75412e}</TaskFBGuid>
+    <Fb_init>{8ac9f090-2eb4-42d9-a19b-08fb8e599f23}</Fb_init>
+    <Fb_exit>{871c46f8-702c-4560-b415-32ea63d3cf4a}</Fb_exit>
+    <CycleUpdate>{09c921c4-ae34-41cd-9df9-55e0e3848ea0}</CycleUpdate>
+    <PostCycleUpdate>{69da2b0b-255b-4c85-8216-dd841021d805}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

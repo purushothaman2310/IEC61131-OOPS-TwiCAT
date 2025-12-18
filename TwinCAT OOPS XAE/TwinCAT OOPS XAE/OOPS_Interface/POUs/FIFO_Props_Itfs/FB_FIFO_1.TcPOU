@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_FIFO_1" Id="{7d20f1f5-68f8-4dda-a4fa-66e225c03a6c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FIFO_1 EXTENDS FB_FIFO_OOP
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="ifEmptyRegister" Id="{7cd02d5f-3e9f-42f9-b54d-32ee951b56ff}">
+      <Declaration><![CDATA[PROPERTY ifEmptyRegister : IF_EmptyRegister]]></Declaration>
+      <Get Name="Get" Id="{1e8b9ca5-eaab-40e5-82b7-e5efa8257c99}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ifEmptyRegister:=super^;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ifFillRegister" Id="{8fb8c73f-19e7-4556-8ab8-037dd6c98bb0}">
+      <Declaration><![CDATA[PROPERTY ifFillRegister : IF_FillRegister]]></Declaration>
+      <Get Name="Get" Id="{175851d4-34ba-4134-ae81-0a0322ea8ba1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ifFillRegister:=super^;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ifRegister" Id="{c5d872c1-d02f-454a-8489-bd087fce09c9}">
+      <Declaration><![CDATA[PROPERTY ifRegister : IF_Register]]></Declaration>
+      <Get Name="Get" Id="{8ccf3126-6346-4196-9f97-54ab605e0003}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ifRegister:=super^;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="IF_Register" Id="{1af179bd-6caa-49b8-b052-c9b24ec646d7}">
+    <Declaration><![CDATA[INTERFACE IF_Register EXTENDS _SYSTEM.IQueryInterface
+]]></Declaration>
+    <Property Name="adiRegister" Id="{25866018-61ea-4598-80cf-77348847c8f4}">
+      <Declaration><![CDATA[PROPERTY adiRegister : REFERENCE TO ARRAY[1..8] OF DINT]]></Declaration>
+      <Get Name="Get" Id="{77f5eec3-1ffd-4cd6-956a-743c40186131}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="etResult" Id="{d0dab8c6-f84f-400a-913c-fc0314bde5c8}">
+      <Declaration><![CDATA[PROPERTY PUBLIC etResult : ET_ResultShiftRegister]]></Declaration>
+      <Get Name="Get" Id="{1688b54f-b2e1-46b5-aaa1-93ab3efc1a24}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

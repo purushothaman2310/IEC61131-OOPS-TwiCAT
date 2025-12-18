@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_FIFO_OOP" Id="{9bfde893-3582-4bf0-9e54-383b9f3d0759}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FIFO_OOP IMPLEMENTS IF_EmptyRegister
+VAR
+	adiRegsiter_local   	: ARRAY[1..8] OF DINT;
+	i  						: INT ;
+	diRegisterLocalValue 	: DINT;
+	diNumberofElements_Local 		: DINT;
+	etResult_Local			: ET_ResultShiftRegister;
+	xReadyforPut_Local		: BOOL:=TRUE;
+	xReadyforGet_Local       : BOOL;
+	diInitValue_loc         :DINT;
+	diLastRegisterValue     :DINT;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="adiRegister" Id="{64361d14-fe88-4346-b016-ce7dbfacca96}">
+      <Declaration><![CDATA[PROPERTY adiRegister : REFERENCE TO ARRAY[1..8] OF DINT]]></Declaration>
+      <Get Name="Get" Id="{a8197604-2bcc-4e77-89f0-dee08b56e7aa}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[adiRegister REF= THIS^.adiRegsiter_local;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="etResult" Id="{b044e928-b7f6-4e1b-865c-63c5ee8cba7e}">
+      <Declaration><![CDATA[PROPERTY etResult : ET_ResultShiftRegister]]></Declaration>
+      <Get Name="Get" Id="{0f0755ff-a5ba-4ca4-8574-bfd334e2e938}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[etResult :=THIS^.etResult_Local;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Get" Id="{8f723e67-fc22-44f4-876d-13abea4e167b}">
+      <Declaration><![CDATA[METHOD Get : DINT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Get := THIS^.adiRegsiter_local[diNumberofElements_Local];
+THIS^.diLastRegisterValue := Get;
+
+THIS^.adiRegsiter_local[diNumberofElements_Local] :=THIS^.diInitValue_loc;
+THIS^.diNumberofElements_Local:=THIS^.diNumberofElements_Local-1;
+THIS^.etResult_Local:= ET_ResultShiftRegister.GetDone;
+THIS^.xReadyforPut_Local := TRUE;	
+
+IF diNumberofElements_Local= 0 THEN
+	THIS^.etResult_Local:= ET_ResultShiftRegister.RegisterIsEmpty;
+	THIS^.xReadyforGet_Local:= FALSE;
+END_IF
+
+	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Init" Id="{afb656a9-aded-4e20-8c11-a3d1d291ed6e}">
+      <Declaration><![CDATA[METHOD PUBLIC Init : BOOL
+VAR_INPUT
+	i_diInitValue : DINT;
+END_VAR
+VAR
+	i : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+FOR i :=  1 TO 8 DO 
+	THIS^.adiRegsiter_local[i]:= i_diInitValue;
+END_FOR
+THIS^.etResult_Local:= ET_ResultShiftRegister.InitDone;
+
+THIS^.xReadyforPut_Local:=TRUE;
+THIS^.xReadyforGet_Local:=FALSE;
+
+THIS^.diInitValue_loc := i_diInitValue;	
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Put" Id="{190c96e8-b4f4-46fe-9ff9-2fa856250454}">
+      <Declaration><![CDATA[METHOD Put : DINT
+VAR_INPUT
+	i_diInValue : DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF THIS^.diNumberofElements_Local<8 THEN
+	THIS^.diNumberofElements_Local:= THIS^.diNumberofElements_Local+1 ;
+	FOR i:=8 TO 2 BY -1 DO 
+		THIS^.adiRegsiter_local[i]:=THIS^.adiRegsiter_local[i-1];		
+	END_FOR
+	THIS^.adiRegsiter_local[1]:=i_diInValue;
+	THIS^.etResult_Local:= ET_ResultShiftRegister.PutDone;
+	THIS^.xReadyforGet_Local := TRUE;
+END_IF
+IF THIS^.diNumberofElements_Local=8 THEN
+		THIS^.etResult_Local:= ET_ResultShiftRegister.RegisterISFull;
+		THIS^.xReadyforPut_Local := FALSE;	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="xReadyForGet" Id="{8e79300a-32e7-418a-ad62-29fe59431b52}">
+      <Declaration><![CDATA[PROPERTY xReadyForGet : BOOL]]></Declaration>
+      <Get Name="Get" Id="{e14428d5-19c9-4710-89ec-dbfc0ee12390}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[xReadyForGet := THIS^.xReadyforGet_Local;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="xReadyForPut" Id="{00455c82-fa73-47eb-9883-a871ba7c4353}">
+      <Declaration><![CDATA[PROPERTY xReadyForPut : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c54aca57-985a-4b7c-95a7-15a89225e62e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[xReadyForPut := THIS^.xReadyforPut_Local;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_FIFO" Id="{1c6a94ff-259f-4eba-af26-5235703782a8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FIFO
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbfifo : FB_FIFO_OOP;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_Init" Id="{8db51797-4263-4cbb-a612-38cb41f7acf8}">
+      <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
+//The return value is not evaluated. For a specific influence, you can also declare the
+//methods explicitly and provide additional code there with the standard initialization
+//code. You can evaluate the return value.
+METHOD FB_Init: BOOL
+VAR_INPUT
+    bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
+    bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)   
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.fbfifo.Init(-3);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ifEmptyRegister" Id="{acf42f43-b488-4f05-8ff7-200670a88927}">
+      <Declaration><![CDATA[PROPERTY ifEmptyRegister : IF_EmptyRegister]]></Declaration>
+      <Get Name="Get" Id="{e6828dd7-f8e1-4f19-a6e0-9c09bc5b44ce}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ifEmptyRegister :=THIS^.fbfifo;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ifFillRegister" Id="{2f354821-bac2-460a-af1f-f7254a3ff9df}">
+      <Declaration><![CDATA[PROPERTY ifFillRegister : IF_FillRegister]]></Declaration>
+      <Get Name="Get" Id="{a1caffc7-1ba1-4d71-b9a3-37cf9dd05a8f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ifEmptyRegister := THIS^.ifFillRegister;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ifRegister" Id="{fef76588-1cba-4a4c-88e2-1c58ff997c82}">
+      <Declaration><![CDATA[PROPERTY ifRegister : IF_Register]]></Declaration>
+      <Get Name="Get" Id="{b8e41cd3-0b67-4f74-8bbf-1b111e54c3ee}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ifRegister:=THIS^.fbfifo;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

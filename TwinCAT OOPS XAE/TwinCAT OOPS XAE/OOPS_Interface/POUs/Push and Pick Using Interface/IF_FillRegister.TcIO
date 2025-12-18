@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="IF_FillRegister" Id="{299b3917-73bb-40dd-bcb2-27c95399145d}">
+    <Declaration><![CDATA[INTERFACE IF_FillRegister EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Method Name="put" Id="{f9aa1693-d4c1-42e9-a1d9-c01823c4d16b}">
+      <Declaration><![CDATA[METHOD put : BOOL
+VAR_INPUT
+	i_diInValue : DINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="xReadyForPut" Id="{c56654b4-25a2-44f8-a355-c51ded9360cc}">
+      <Declaration><![CDATA[PROPERTY xReadyForPut : BOOL]]></Declaration>
+      <Get Name="Get" Id="{962aaede-243d-467f-b0be-c4a817184d53}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="SR_FIFO" Id="{290f2d49-7a44-4825-a6b8-fb543cecc3ce}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM SR_FIFO
+VAR
+	fbFiFO : FB_FIFO_OOP;
+	xFirst: BOOL;
+	adiRegsiter: ARRAY [1..8] OF DINT;
+	iStep: INT;
+	diOutValue : DINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[adiRegsiter := fbFIFO.adiRegister;
+CASE iStep OF 
+	
+	10:fbFIFO.Init(-1);
+	
+	20: IF fbFIFO.xReadyForPut THEN
+			fbFIFO.Put(23);
+		END_IF
+	
+	30: IF fbFIFO.xReadyForGet THEN
+			diOutValue:=fbFIFO.Get();
+		END_IF
+	
+	
+END_CASE
+iStep:=0;]]></ST>
+    </Implementation>
+    <Action Name="RandomGenerator" Id="{c88ae8cc-a35c-4144-9b9b-694e51b29660}">
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

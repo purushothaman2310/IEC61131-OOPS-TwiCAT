@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="IF_EmptyRegister" Id="{95e70f9b-8d68-4249-9198-0a0b867ca004}">
+    <Declaration><![CDATA[INTERFACE IF_EmptyRegister EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Method Name="Get" Id="{f697f8d1-dd29-4f8d-9a39-d29fb7ca472f}">
+      <Declaration><![CDATA[METHOD Get : DINT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="xReadyForGet" Id="{ab3a0d7e-a581-4982-a2fd-c59ae6ac3e3c}">
+      <Declaration><![CDATA[PROPERTY xReadyForGet : BOOL]]></Declaration>
+      <Get Name="Get" Id="{8802ca4c-3526-4d62-9882-93cca422cfd8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

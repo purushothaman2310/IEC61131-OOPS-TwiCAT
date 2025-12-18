@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ET_ResultShiftRegister" Id="{f151389d-9dcc-4d99-9d9b-eafa9597b50a}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE ET_ResultShiftRegister :
+(
+	NotInitialised,
+	LengthInvalid,
+	PositionIsWrong,
+	InitDone,
+	RegNumberInvalid,
+	GetDone,
+	PutDone,
+	ErrorQuitDone,
+	RegisterIsEmpty,
+	RegisterISFull,
+	OverwriteDone,
+	ReadRegisterDone
+	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
