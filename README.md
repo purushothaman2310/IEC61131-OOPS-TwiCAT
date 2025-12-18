@@ -99,7 +99,7 @@ These interfaces allow loose coupling between FIFO logic and register handling.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/<your-username>/<repo-name>.git](https://github.com/purushothaman2310/IEC61131-OOPS-TwiCAT.git
+   git clone https://github.com/purushothaman2310/IEC61131-OOPS-TwiCAT.git
    ```
 2. Open the `.sln` file in **Visual Studio (TwinCAT XAE)**.
 3. Activate the TwinCAT configuration.
